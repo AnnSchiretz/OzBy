@@ -15,11 +15,11 @@ public class PersonalInfoSteps {
     @Step("Change user alias")
     public void changeUserAlias(String alias) {
         infoPage.openPage()
-                .changeAliasAndSafe(alias);
+                .changeAliasAndSave(alias);
     }
 
     @Step("Upload user image")
-    public void uploadImg(String path, int count) {
-        infoPage.uploadImage(path, count);
+    public void uploadImg(String path) {
+        infoPage.uploadImage(path);
     }
 }
