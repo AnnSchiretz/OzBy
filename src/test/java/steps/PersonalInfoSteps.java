@@ -17,4 +17,9 @@ public class PersonalInfoSteps {
         infoPage.openPage()
                 .changeAliasAndSafe(alias);
     }
+
+    @Step("Upload user image")
+    public void uploadImg(String path, int count) {
+        infoPage.uploadImage(path, count);
+    }
 }
