@@ -20,7 +20,7 @@ public class LogInSteps {
 
     @Step("Send email and password")
     public LogInSteps login(String email, String password) {
-        login.sendEmailAndPassword(email, password);
+        login.inputEmailAndPassword(email, password);
         return this;
     }
 
