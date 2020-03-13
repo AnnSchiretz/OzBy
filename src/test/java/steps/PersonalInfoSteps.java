@@ -13,9 +13,13 @@ public class PersonalInfoSteps {
     }
 
     @Step("Change user alias")
-    public void changeUserAliasAndValidationAlias(String newAlias) {
+    public void changeUserAlias(String newAlias) {
         infoPage.openPage()
-                .changeAliasAndSafe(newAlias)
-                .validationAlias(newAlias);
+                .changeAliasAndSafe(newAlias);
+    }
+
+    @Step("Validation user name after update")
+    public void validationUserName(String userName) {
+        infoPage.validationAlias(userName);
     }
 }
