@@ -1,6 +1,5 @@
 package page;
 
-import models.Address;
 import org.openqa.selenium.By;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
@@ -8,8 +7,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import utils.AllureUtils;
 import java.io.File;
-import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.assertTrue;
+
+import static org.testng.Assert.*;
 
 public class PersonalInfoPage extends BasePage {
     private static final By PERSONAL_INFO = By.cssSelector(".rightcol");
@@ -19,6 +18,7 @@ public class PersonalInfoPage extends BasePage {
     private static final By SUCCESSFUL_UPDATE = By.cssSelector(".c-green");
     private static final By BUTTON_UPLOAD_IMAGE = By.cssSelector("input[type=file]");
     private static final By AVATAR = By.cssSelector(".avatar-view");
+    private static final By IMAGE = By.cssSelector(".avatar-view img");
     private static final By CHANGE_BUTTON = By.cssSelector(".dashed");
 
     public PersonalInfoPage(WebDriver driver) {
@@ -50,6 +50,7 @@ public class PersonalInfoPage extends BasePage {
     }
 
     public PersonalInfoPage uploadImage(String pathImg) {
+        String avatarBeforeUpdate = driver.findElement(IMAGE).getAttribute("src");
         if (driver.findElement(CHANGE_BUTTON).isDisplayed()) {
             driver.findElement(CHANGE_BUTTON).click();
         }
@@ -60,7 +61,8 @@ public class PersonalInfoPage extends BasePage {
         AllureUtils.takeScreenshot(driver);
         assertTrue(wait.until(ExpectedConditions.visibilityOfElementLocated(AVATAR)).isDisplayed(),
                 "Не загрузилось изображение");
+        String avatarAfterUpdate = driver.findElement(IMAGE).getAttribute("src");
+        assertNotEquals(avatarBeforeUpdate, avatarAfterUpdate, "Не произошла загрузка, т.к url изображений совпадает");
         return this;
     }
-
 }
