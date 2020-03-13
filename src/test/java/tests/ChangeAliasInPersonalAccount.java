@@ -5,12 +5,13 @@ import org.testng.annotations.Test;
 public class ChangeAliasInPersonalAccount extends BaseTest {
     @Test
     public void goToPersonalInfo() {
-        String alias = "Hanna";
+        String alias = "Helena";
+        String newAlias = "Hanna";
         userSteps.goToPersonalInfo();
-        changeUserAlias(alias);
-    }
-
-    private void changeUserAlias(String alias) {
         infoSteps.changeUserAlias(alias);
+        infoSteps.validationUserName(alias);
+        infoSteps.changeUserAlias(newAlias);
+        infoSteps.validationUserName(newAlias);
+
     }
 }

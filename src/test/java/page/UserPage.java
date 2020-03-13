@@ -4,6 +4,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import utils.AllureUtils;
 
 public class UserPage extends BasePage {
     private static final By USER_ACCOUNT = By.cssSelector(".b-user-card");
@@ -23,6 +24,7 @@ public class UserPage extends BasePage {
         try {
             wait.until(ExpectedConditions.visibilityOfElementLocated(USER_ACCOUNT));
         } catch (TimeoutException ex) {
+            AllureUtils.takeScreenshot(driver);
             throw new TimeoutException("Страница не загрузилась");
         }
     }
