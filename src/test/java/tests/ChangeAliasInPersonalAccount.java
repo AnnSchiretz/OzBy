@@ -6,11 +6,12 @@ public class ChangeAliasInPersonalAccount extends BaseTest {
     @Test
     public void goToPersonalInfo() {
         String alias = "Helena";
+        String newAlias = "Hanna";
         userSteps.goToPersonalInfo();
-        changeUserAlias(alias);
-    }
+        infoSteps.changeUserAlias(alias);
+        infoSteps.validationUserName(alias);
+        infoSteps.changeUserAlias(newAlias);
+        infoSteps.validationUserName(newAlias);
 
-    private void changeUserAlias(String alias) {
-        infoSteps.changeUserAliasAndValidationAlias(alias);
     }
 }
