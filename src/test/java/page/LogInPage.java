@@ -34,6 +34,7 @@ public class LogInPage extends BasePage {
         try {
             wait.until(ExpectedConditions.visibilityOfElementLocated(SEARCH_TOP));
         } catch (TimeoutException ex) {
+            AllureUtils.takeScreenshot(driver);
             throw new TimeoutException("Страница не загрузилась");
         }
     }

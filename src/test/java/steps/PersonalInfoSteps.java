@@ -15,7 +15,12 @@ public class PersonalInfoSteps {
     @Step("Change user alias")
     public void changeUserAlias(String newAlias) {
         infoPage.openPage()
-                .changeAliasAndSafe(newAlias);
+                .changeAliasAndSave(alias);
+    }
+
+    @Step("Upload user image")
+    public void uploadImg(String path) {
+        infoPage.uploadImage(path);
     }
 
     @Step("Validation user name after update")
