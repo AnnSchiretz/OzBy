@@ -108,14 +108,15 @@ public class PersonalInfoPage extends BasePage {
             return 0;
         } else {
             addresses = driver.findElements(ADDED_ADDRESSES);
-            assertNotEquals(addresses.size(), 0, "");
+            assertNotEquals(addresses.size(), 0, "Количество адресов равно 0, либо что-то пошло не так");
+            AllureUtils.takeScreenshot(driver);
         }
         return addresses.size();
     }
 
     public PersonalInfoPage checkAddressAfterAdding(int size) {
         List<WebElement> addressesAfterAdding = driver.findElements(ADDED_ADDRESSES);
-        assertEquals(size + 1, addressesAfterAdding.size(), "");
+        assertEquals(size + 1, addressesAfterAdding.size(), "Не совпало количество адресов после добавления и до добавления");
         return this;
     }
 }
