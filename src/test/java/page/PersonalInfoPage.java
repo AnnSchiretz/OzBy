@@ -46,6 +46,13 @@ public class PersonalInfoPage extends BasePage {
         String result = wait.until(ExpectedConditions.visibilityOfElementLocated(SUCCESSFUL_UPDATE)).getText();
         AllureUtils.takeScreenshot(driver);
         assertEquals(result, "Личные данные успешно сохранены!", "Не произошло обновление данных");
+        driver.navigate().refresh();
+        return this;
+    }
+
+    public PersonalInfoPage validationAlias(String userName) {
+        String result = driver.findElement(ALIAS_INPUT).getAttribute("value");
+        assertEquals(result, userName, "Не совпадают имена после изменения");
         return this;
     }
 
