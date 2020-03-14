@@ -5,7 +5,6 @@ import models.Address;
 import org.openqa.selenium.WebDriver;
 import page.PersonalInfoPage;
 
-
 public class PersonalInfoSteps {
     private PersonalInfoPage infoPage;
 
@@ -15,14 +14,14 @@ public class PersonalInfoSteps {
     }
 
     @Step("Change user alias")
-    public void changeUserAlias(String alias) {
+    public void changeUserAlias(String newAlias) {
         infoPage.openPage()
-                .changeAliasAndSafe(alias);
+                .changeAliasAndSave(newAlias);
     }
 
     @Step("Upload user image")
-    public void uploadImg(String path, int count) {
-        infoPage.uploadImage(path, count);
+    public void uploadImg(String path) {
+        infoPage.uploadImage(path);
     }
 
     @Step("Add new address")

@@ -7,7 +7,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import utils.AllureUtils;
-
 import java.io.File;
 import java.util.List;
 
@@ -17,10 +16,11 @@ public class PersonalInfoPage extends BasePage {
     private static final By PERSONAL_INFO = By.cssSelector(".rightcol");
     private static final By ALIAS_INPUT = By.cssSelector(".rec-change input");
     private static final By ALIAS_INPUT_AFTER_CLEAR = By.cssSelector(".rec-v input");
-    private static final By SAFE_BUTTON = By.cssSelector(".button-small");
+    private static final By SAVE_BUTTON = By.cssSelector(".button-small");
     private static final By SUCCESSFUL_UPDATE = By.cssSelector(".c-green");
-    private static final By BUTTON_UPLOAD_IMAGE = By.xpath("//input[@type='file']");
+    private static final By BUTTON_UPLOAD_IMAGE = By.cssSelector("input[type=file]");
     private static final By AVATAR = By.cssSelector(".avatar-view");
+    private static final By IMAGE = By.cssSelector(".avatar-view img");
     private static final By CHANGE_BUTTON = By.cssSelector(".dashed");
     private static final By GO_TO_ADDRESS = By.xpath("//a[contains(text(), 'Адреса доставки')]");
     private static final By ADDRESS_FORM = By.cssSelector(".address-edit-frm");
@@ -48,29 +48,38 @@ public class PersonalInfoPage extends BasePage {
         try {
             wait.until(ExpectedConditions.visibilityOfElementLocated(PERSONAL_INFO));
         } catch (TimeoutException ex) {
+            AllureUtils.takeScreenshot(driver);
             throw new TimeoutException("Страница не загрузилась");
         }
     }
 
-    public PersonalInfoPage changeAliasAndSafe(String alias) {
+    public PersonalInfoPage changeAliasAndSave(String alias) {
         driver.findElement(ALIAS_INPUT).clear();
         driver.findElement(ALIAS_INPUT_AFTER_CLEAR).sendKeys(alias);
-        driver.findElement(SAFE_BUTTON).click();
+        driver.findElement(SAVE_BUTTON).click();
         String result = wait.until(ExpectedConditions.visibilityOfElementLocated(SUCCESSFUL_UPDATE)).getText();
+        AllureUtils.takeScreenshot(driver);
         assertEquals(result, "Личные данные успешно сохранены!", "Не произошло обновление данных");
+        driver.navigate().refresh();
         return this;
     }
 
-    public PersonalInfoPage uploadImage(String pathImg, int count) {
+    public PersonalInfoPage validationAlias(String userName) {
+        String result = driver.findElement(ALIAS_INPUT).getAttribute("value");
+        assertEquals(result, userName, "Не совпадают имена после изменения");
+        return this;
+    }
+
+    public PersonalInfoPage uploadImage(String pathImg) {
+        String avatarBeforeUpdate = driver.findElement(IMAGE).getAttribute("src");
         if (driver.findElement(CHANGE_BUTTON).isDisplayed()) {
             driver.findElement(CHANGE_BUTTON).click();
         }
         WebElement inputImg = driver.findElement(BUTTON_UPLOAD_IMAGE);
-        for (int i = 0; i < count; i++) {
-            File file = new File(pathImg);
-            inputImg.sendKeys(file.getAbsolutePath());
-        }
-        driver.findElement(SAFE_BUTTON).click();
+        File file = new File(pathImg);
+        inputImg.sendKeys(file.getAbsolutePath());
+        driver.findElement(SAVE_BUTTON).click();
+        AllureUtils.takeScreenshot(driver);
         assertTrue(wait.until(ExpectedConditions.visibilityOfElementLocated(AVATAR)).isDisplayed(),
                 "Не загрузилось изображение");
         return this;
