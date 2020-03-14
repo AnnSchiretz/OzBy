@@ -7,6 +7,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import utils.AllureUtils;
+
 import java.io.File;
 import java.util.List;
 
@@ -82,6 +83,8 @@ public class PersonalInfoPage extends BasePage {
         AllureUtils.takeScreenshot(driver);
         assertTrue(wait.until(ExpectedConditions.visibilityOfElementLocated(AVATAR)).isDisplayed(),
                 "Не загрузилось изображение");
+        String avatarAfterUpdate = driver.findElement(IMAGE).getAttribute("src");
+        assertNotEquals(avatarBeforeUpdate, avatarAfterUpdate, "Не произошла загрузка, т.к url изображений совпадает");
         return this;
     }
 

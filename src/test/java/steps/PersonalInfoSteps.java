@@ -5,6 +5,7 @@ import models.Address;
 import org.openqa.selenium.WebDriver;
 import page.PersonalInfoPage;
 
+
 public class PersonalInfoSteps {
     private PersonalInfoPage infoPage;
 
@@ -22,6 +23,11 @@ public class PersonalInfoSteps {
     @Step("Upload user image")
     public void uploadImg(String path) {
         infoPage.uploadImage(path);
+    }
+
+    @Step("Validation user name after update")
+    public void validationUserName(String userName) {
+        infoPage.validationAlias(userName);
     }
 
     @Step("Add new address")

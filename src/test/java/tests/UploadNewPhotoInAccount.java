@@ -7,7 +7,7 @@ public class UploadNewPhotoInAccount extends BaseTest {
     public void uploadImage() {
         String pathImg = "src/test/resources/avatar.jpg";
         userSteps.goToPersonalInfo();
-        infoSteps.uploadImg(pathImg, 1);
+        infoSteps.uploadImg(pathImg);
     }
 
 }
