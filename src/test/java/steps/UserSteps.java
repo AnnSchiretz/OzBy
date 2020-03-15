@@ -16,4 +16,10 @@ public class UserSteps {
         userPage.openPage()
                 .goToPersonalInfo();
     }
+
+    @Step("Go to Birthday")
+    public void goToBirthdays() {
+        userPage.openPage()
+                .goToBirthdays();
+    }
 }

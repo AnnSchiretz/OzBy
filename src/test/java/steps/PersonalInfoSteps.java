@@ -15,7 +15,7 @@ public class PersonalInfoSteps {
     @Step("Change user alias")
     public void changeUserAlias(String newAlias) {
         infoPage.openPage()
-                .changeAliasAndSave(alias);
+                .changeAliasAndSave(newAlias);
     }
 
     @Step("Upload user image")
