@@ -23,6 +23,7 @@ public class PersonalInfoPage extends BasePage {
     private static final By ADDED_ADDRESSES = By.cssSelector(".b-addresses-list li");
     private static final By ADDRESS_NAME = By.cssSelector(".b-addresses-list li h2");
     private static final By DELETE_BUTTON = By.cssSelector(".btn-delete");
+    private static final By ADDRESS_FORM = By.cssSelector(".address-edit-frm");
 
     public PersonalInfoPage(WebDriver driver) {
         super(driver);
@@ -95,16 +96,20 @@ public class PersonalInfoPage extends BasePage {
 
     public PersonalInfoPage deleteAddress(String address) {
         List<WebElement> addresses = driver.findElements(ADDED_ADDRESSES);
-        for (WebElement a : addresses) {
-            String name = a.findElement(ADDRESS_NAME).getText();
-            System.out.println(name);
-            if (name.equals(address)) {
-                Actions act = new Actions(driver);
-                act.moveToElement(a).build().perform();
-                act.moveToElement(a.findElement(DELETE_BUTTON)).build().perform();
-                JavascriptExecutor executor = (JavascriptExecutor) driver;
-                executor.executeAsyncScript("arguments[0].click();", a.findElement(DELETE_BUTTON));
-                driver.switchTo().alert().accept();
+        if (addresses.size() == 0) {
+            driver.findElement(ADDRESS_FORM).isDisplayed();
+        } else {
+            for (WebElement a : addresses) {
+                String name = a.findElement(ADDRESS_NAME).getText();
+                System.out.println(name);
+                if (name.equals(address)) {
+                    Actions act = new Actions(driver);
+                    act.moveToElement(a).build().perform();
+                    act.moveToElement(a.findElement(DELETE_BUTTON)).build().perform();
+                    JavascriptExecutor executor = (JavascriptExecutor) driver;
+                    executor.executeAsyncScript("arguments[0].click();", a.findElement(DELETE_BUTTON));
+                    driver.switchTo().alert().accept();
+                }
             }
         }
         return this;
@@ -114,7 +119,11 @@ public class PersonalInfoPage extends BasePage {
         System.out.println(size);
         List<WebElement> addressesAfterAdding = driver.findElements(ADDED_ADDRESSES);
         System.out.println(addressesAfterAdding.size());
-        assertEquals(addressesAfterAdding.size(), size - 1, "Не совпало количество до и после, значит не удалился адрес");
+        if (size == 0) {
+            assertEquals(addressesAfterAdding.size(), size, "Не совпало количество до и после, значит не удалился адрес");
+        } else {
+            assertEquals(addressesAfterAdding.size(), size - 1, "Не совпало количество до и после, значит не удалился адрес");
+        }
         return this;
     }
 }
