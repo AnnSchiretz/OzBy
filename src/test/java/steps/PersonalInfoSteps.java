@@ -15,7 +15,7 @@ public class PersonalInfoSteps {
     @Step("Change user alias")
     public void changeUserAlias(String newAlias) {
         infoPage.openPage()
-                .changeAliasAndSave(alias);
+                .changeAliasAndSave(newAlias);
     }
 
     @Step("Upload user image")
@@ -26,5 +26,18 @@ public class PersonalInfoSteps {
     @Step("Validation user name after update")
     public void validationUserName(String userName) {
         infoPage.validationAlias(userName);
+    }
+
+    @Step("Go to addresses list and check count before delete ")
+    public int goToAddresses() {
+        infoPage.goToAddressInfo();
+        int result = infoPage.getCountAddresses();
+        return result;
+    }
+
+    @Step("Delete address and check count after deleting")
+    public void deleteAddresses(String address, int result) {
+        infoPage.deleteAddress(address)
+                .checkCountAddressesAfterDelete(result);
     }
 }
