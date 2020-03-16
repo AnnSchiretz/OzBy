@@ -2,7 +2,7 @@ package tests;
 
 import org.testng.annotations.Test;
 
-public class DeleteDeliveryAddress extends BaseTest {
+public class DeleteDeliveryAddressTest extends BaseTest {
     @Test
     public void deleteDeliveryAddress() {
         String address = "ул. Кирова, дом 22, кв. 10";
