@@ -2,7 +2,7 @@ package tests;
 
 import org.testng.annotations.Test;
 
-public class UploadNewPhotoInAccount extends BaseTest {
+public class UploadNewPhotoInAccountTest extends BaseTest {
     @Test
     public void uploadImage() {
         String pathImg = "src/test/resources/avatar.jpg";
