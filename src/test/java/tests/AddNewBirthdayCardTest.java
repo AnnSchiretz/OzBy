@@ -3,7 +3,7 @@ package tests;
 import model.InfoForBirthday;
 import org.testng.annotations.Test;
 
-public class AddNewBirthdayCard extends BaseTest {
+public class AddNewBirthdayCardTest extends BaseTest {
     @Test
     public void addBirthday() {
         InfoForBirthday user = new InfoForBirthday("Маргарита", "+375336754534", "05", "декабря", "1990", "Женский", "алалалалалала");
