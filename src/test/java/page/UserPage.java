@@ -44,6 +44,7 @@ public class UserPage extends BasePage {
         BirthdayPage birthday = new BirthdayPage(driver);
         birthday.openPage();
         return birthday;
+    }
 
     public ProductPage searchProduct(String name) {
         driver.findElement(SEARCH_PRODUCT).sendKeys(name);
