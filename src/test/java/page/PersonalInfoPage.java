@@ -37,10 +37,8 @@ public class PersonalInfoPage extends BasePage {
     private static final By SUCCESSFUL_ADD_ADDRESS = By.cssSelector(".attention-imp-p");
     private static final By ADDED_ADDRESSES = By.cssSelector(".b-addresses-list li");
     private static final By ADD_ANOTHER_ADDRESS_BUTTON = By.cssSelector(".b-addresses-add a");
-    private static final By ADDED_ADDRESSES = By.cssSelector(".b-addresses-list li");
     private static final By ADDRESS_NAME = By.cssSelector(".b-addresses-list li h2");
     private static final By DELETE_BUTTON = By.cssSelector(".btn-delete");
-    private static final By ADDRESS_FORM = By.cssSelector(".address-edit-frm");
 
 
     public PersonalInfoPage(WebDriver driver) {
@@ -133,6 +131,7 @@ public class PersonalInfoPage extends BasePage {
     public PersonalInfoPage checkAddressAfterAdding(int size) {
         List<WebElement> addressesAfterAdding = driver.findElements(ADDED_ADDRESSES);
         assertEquals(size + 1, addressesAfterAdding.size(), "Не совпало количество адресов после добавления и до добавления");
+        return this;
     }
     public int getCountAddresses() {
         List<WebElement> addresses;
@@ -168,7 +167,6 @@ public class PersonalInfoPage extends BasePage {
 
     public PersonalInfoPage checkCountAddressesAfterDelete(int size) {
         List<WebElement> addressesAfterAdding = driver.findElements(ADDED_ADDRESSES);
-        System.out.println(addressesAfterAdding.size());
         if (size == 0) {
             assertEquals(addressesAfterAdding.size(), size, "Не совпало количество до и после, значит не удалился адрес");
         } else {
