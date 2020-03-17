@@ -5,6 +5,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import utils.AllureUtils;
 
@@ -35,6 +37,11 @@ public class PersonalInfoPage extends BasePage {
     private static final By SUCCESSFUL_ADD_ADDRESS = By.cssSelector(".attention-imp-p");
     private static final By ADDED_ADDRESSES = By.cssSelector(".b-addresses-list li");
     private static final By ADD_ANOTHER_ADDRESS_BUTTON = By.cssSelector(".b-addresses-add a");
+    private static final By ADDED_ADDRESSES = By.cssSelector(".b-addresses-list li");
+    private static final By ADDRESS_NAME = By.cssSelector(".b-addresses-list li h2");
+    private static final By DELETE_BUTTON = By.cssSelector(".btn-delete");
+    private static final By ADDRESS_FORM = By.cssSelector(".address-edit-frm");
+
 
     public PersonalInfoPage(WebDriver driver) {
         super(driver);
@@ -126,6 +133,47 @@ public class PersonalInfoPage extends BasePage {
     public PersonalInfoPage checkAddressAfterAdding(int size) {
         List<WebElement> addressesAfterAdding = driver.findElements(ADDED_ADDRESSES);
         assertEquals(size + 1, addressesAfterAdding.size(), "Не совпало количество адресов после добавления и до добавления");
+    }
+    public int getCountAddresses() {
+        List<WebElement> addresses;
+        if (driver.findElements(ADDED_ADDRESSES).isEmpty()) {
+            return 0;
+        } else {
+            addresses = driver.findElements(ADDED_ADDRESSES);
+            assertNotEquals(addresses.size(), 0, "");
+        }
+        return addresses.size();
+    }
+
+    public PersonalInfoPage deleteAddress(String address) {
+        List<WebElement> addresses = driver.findElements(ADDED_ADDRESSES);
+        if (addresses.size() == 0) {
+            driver.findElement(ADDRESS_FORM).isDisplayed();
+        } else {
+            for (WebElement a : addresses) {
+                String name = a.findElement(ADDRESS_NAME).getText();
+                System.out.println(name);
+                if (name.equals(address)) {
+                    Actions act = new Actions(driver);
+                    act.moveToElement(a).build().perform();
+                    act.moveToElement(a.findElement(DELETE_BUTTON)).build().perform();
+                    JavascriptExecutor executor = (JavascriptExecutor) driver;
+                    executor.executeAsyncScript("arguments[0].click();", a.findElement(DELETE_BUTTON));
+                    driver.switchTo().alert().accept();
+                }
+            }
+        }
+        return this;
+    }
+
+    public PersonalInfoPage checkCountAddressesAfterDelete(int size) {
+        List<WebElement> addressesAfterAdding = driver.findElements(ADDED_ADDRESSES);
+        System.out.println(addressesAfterAdding.size());
+        if (size == 0) {
+            assertEquals(addressesAfterAdding.size(), size, "Не совпало количество до и после, значит не удалился адрес");
+        } else {
+            assertEquals(addressesAfterAdding.size(), size - 1, "Не совпало количество до и после, значит не удалился адрес");
+        }
         return this;
     }
 }

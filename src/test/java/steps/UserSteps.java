@@ -16,4 +16,9 @@ public class UserSteps {
         userPage.openPage()
                 .goToPersonalInfo();
     }
+
+    @Step("Search product")
+    public void searchProduct(String name) {
+        userPage.searchProduct(name);
+    }
 }

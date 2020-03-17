@@ -37,4 +37,16 @@ public class PersonalInfoSteps {
         infoPage.addAddressDelivery(address);
         infoPage.checkAddressAfterAdding(sizeAddress);
     }
+    @Step("Go to addresses list and check count before delete ")
+    public int goToAddresses() {
+        infoPage.goToAddressInfo();
+        int result = infoPage.getCountAddresses();
+        return result;
+    }
+
+    @Step("Delete address and check count after deleting")
+    public void deleteAddresses(String address, int result) {
+        infoPage.deleteAddress(address)
+                .checkCountAddressesAfterDelete(result);
+    }
 }

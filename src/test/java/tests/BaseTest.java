@@ -4,9 +4,9 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
-import page.UserPage;
 import steps.LogInSteps;
 import steps.PersonalInfoSteps;
+import steps.ProductSteps;
 import steps.UserSteps;
 import utils.CapabilitiesGenerator;
 import utils.PropertyManager;
@@ -17,6 +17,7 @@ public class BaseTest {
     PersonalInfoSteps infoSteps;
     UserSteps userSteps;
     PropertyManager props;
+    ProductSteps product;
 
     @BeforeMethod(description = "Opening Chrome Driver")
     public void createDriver() {
@@ -24,6 +25,7 @@ public class BaseTest {
         login = new LogInSteps(driver);
         infoSteps = new PersonalInfoSteps(driver);
         userSteps = new UserSteps(driver);
+        product = new ProductSteps(driver);
     }
 
     @BeforeMethod
