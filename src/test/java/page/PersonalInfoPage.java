@@ -115,11 +115,8 @@ public class PersonalInfoPage extends BasePage {
     }
 
     public int checkAddressBeforeAdding() {
-        List<WebElement> addresses;
-        if (driver.findElements(ADDED_ADDRESSES).isEmpty()) {
-            return 0;
-        } else {
-            addresses = driver.findElements(ADDED_ADDRESSES);
+        List<WebElement> addresses = driver.findElements(ADDED_ADDRESSES);
+        if (addresses.size() > 0) {
             assertNotEquals(addresses.size(), 0, "Количество адресов равно 0, либо что-то пошло не так");
             AllureUtils.takeScreenshot(driver);
         }
