@@ -22,4 +22,8 @@ public class UserSteps {
         userPage.openPage()
                 .goToBirthdays();
     }
+    @Step("Search product")
+    public void searchProduct(String name) {
+        userPage.searchProduct(name);
+    }
 }

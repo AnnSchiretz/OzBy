@@ -2,7 +2,7 @@ package tests;
 
 import org.testng.annotations.Test;
 
-public class ChangeAliasInPersonalAccount extends BaseTest {
+public class ChangeAliasInPersonalAccountTest extends BaseTest {
     @Test
     public void goToPersonalInfo() {
         String alias = "Helena";

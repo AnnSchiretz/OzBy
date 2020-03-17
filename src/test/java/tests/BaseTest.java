@@ -7,6 +7,7 @@ import org.testng.annotations.BeforeMethod;
 import steps.BirthdaySteps;
 import steps.LogInSteps;
 import steps.PersonalInfoSteps;
+import steps.ProductSteps;
 import steps.UserSteps;
 import utils.CapabilitiesGenerator;
 import utils.PropertyManager;
@@ -19,6 +20,7 @@ public class BaseTest {
     PropertyManager props;
     BirthdaySteps birthday;
 
+
     @BeforeMethod(description = "Opening Chrome Driver")
     public void createDriver() {
         driver = new ChromeDriver(CapabilitiesGenerator.getChromeOptions());
@@ -26,6 +28,7 @@ public class BaseTest {
         infoSteps = new PersonalInfoSteps(driver);
         userSteps = new UserSteps(driver);
         birthday = new BirthdaySteps(driver);
+        product = new ProductSteps(driver);
     }
 
     @BeforeMethod

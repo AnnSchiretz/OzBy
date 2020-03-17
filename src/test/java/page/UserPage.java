@@ -1,6 +1,7 @@
 package page;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -10,9 +11,9 @@ public class UserPage extends BasePage {
     private static final By USER_ACCOUNT = By.cssSelector(".b-user-card");
     private static final By GO_TO_PERSONAL_INFO = By.xpath("//a[contains(text(), 'Личные данные')]");
     private static final By GO_TO_BIRTHDAYS = By.xpath("//a[contains(text(), 'Дни рождения')]");
-
-
-    public UserPage(WebDriver driver) {
+    private static final By SEARCH_PRODUCT = By.id("top-s");
+    
+  public UserPage(WebDriver driver) {
         super(driver);
     }
 
@@ -43,5 +44,10 @@ public class UserPage extends BasePage {
         BirthdayPage birthday = new BirthdayPage(driver);
         birthday.openPage();
         return birthday;
+
+    public ProductPage searchProduct(String name) {
+        driver.findElement(SEARCH_PRODUCT).sendKeys(name);
+        driver.findElement(SEARCH_PRODUCT).sendKeys(Keys.ENTER);
+        return new ProductPage(driver);
     }
 }
