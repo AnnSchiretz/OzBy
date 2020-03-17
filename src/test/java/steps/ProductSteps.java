@@ -28,4 +28,15 @@ public class ProductSteps {
         product.checkProductCountAfterAdding(count);
         return this;
     }
+
+    @Step("Count product before add to wish list")
+    public int countBeforeAddToWishList() {
+        return product.countBeforeAddInWishList();
+    }
+
+    @Step("Count product after adding in wish list")
+    public ProductSteps validationProductCountInWishList(int count) {
+        product.addProductToWishListAndCheckCount(count);
+        return this;
+    }
 }
