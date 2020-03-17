@@ -18,7 +18,10 @@ public class ProductPage extends BasePage {
     private static final By PRODUCT_TITLE = By.cssSelector(".b-product-title__heading h1");
     private static final By ADD_PRODUCT_TO_BASKET = By.cssSelector(".b-product-control__button");
     private static final By COUNTER_PRODUCT_BASKET = By.cssSelector(".top-panel__userbar__cart__count");
-
+    private static final By PRODUCT_STATUS = By.cssSelector(".b-product-action__text_out");
+    private static final By COUNTER_PRODUCT_WISHLIST = By.cssSelector(".top-panel__userbar__favs__count");
+    private static final By ADD_TO_WISHLIST = By.cssSelector(".b-product-action__label_fav-action");
+    private static final By ADD_INDICATOR = By.cssSelector(".b-product-action__spinner");
     public ProductPage(WebDriver driver) {
         super(driver);
     }
@@ -65,4 +68,23 @@ public class ProductPage extends BasePage {
         assertEquals(count + 1, countAfter, "Не сошлись значения корзины и количество добавленного товара");
     }
 
+    public int countBeforeAddInWishList() {
+        int countBefore;
+        if (driver.findElement(COUNTER_PRODUCT_WISHLIST).getText().equals("")) {
+            countBefore = 0;
+        } else {
+            countBefore = Integer.parseInt(driver.findElement(COUNTER_PRODUCT_WISHLIST).getText());
+        }
+        return countBefore;
+    }
+
+    public void addProductToWishListAndCheckCount(int count) {
+        driver.findElement(ADD_TO_WISHLIST).click();
+        wait.until(ExpectedConditions.invisibilityOfElementLocated(ADD_INDICATOR));
+        String status = wait.until(ExpectedConditions.visibilityOfElementLocated(PRODUCT_STATUS)).getText();
+        assertEquals(status, "В избранном", "Не добавился товар в избранное");
+        wait.until(ExpectedConditions.visibilityOfElementLocated(COUNTER_PRODUCT_WISHLIST));
+        int countAfter = Integer.parseInt(driver.findElement(COUNTER_PRODUCT_WISHLIST).getText());
+        assertEquals(count + 1, countAfter, "Не сошлись значения корзины и количество добавленного товара");
+    }
 }
