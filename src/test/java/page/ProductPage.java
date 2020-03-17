@@ -55,11 +55,11 @@ public class ProductPage extends BasePage {
             break;
         }
         driver.findElement(PRODUCT_TITLE).isDisplayed();
-        driver.findElement(ADD_PRODUCT_TO_BASKET).click();
         return this;
     }
 
-    public void checkProductCountAfterAdding(int count) {
+    public void addProductAndCheckCountAfterAdding(int count) {
+        driver.findElement(ADD_PRODUCT_TO_BASKET).click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(COUNTER_PRODUCT_BASKET));
         int countAfter = Integer.parseInt(driver.findElement(COUNTER_PRODUCT_BASKET).getText());
         assertEquals(count + 1, countAfter, "Не сошлись значения корзины и количество добавленного товара");

@@ -25,7 +25,7 @@ public class ProductSteps {
 
     @Step("Validation count product after adding")
     public ProductSteps validationProductCount(int count) {
-        product.checkProductCountAfterAdding(count);
+        product.addProductAndCheckCountAfterAdding(count);
         return this;
     }
 }
