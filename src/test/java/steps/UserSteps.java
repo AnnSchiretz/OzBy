@@ -21,4 +21,9 @@ public class UserSteps {
     public void searchProduct(String name) {
         userPage.searchProduct(name);
     }
+
+    @Step("Go to basket")
+    public void goToBasket() {
+        userPage.goToBasket();
+    }
 }

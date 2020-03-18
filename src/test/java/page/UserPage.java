@@ -11,6 +11,8 @@ public class UserPage extends BasePage {
     private static final By USER_ACCOUNT = By.cssSelector(".b-user-card");
     private static final By GO_TO_PERSONAL_INFO = By.xpath("//a[contains(text(), 'Личные данные')]");
     private static final By SEARCH_PRODUCT = By.id("top-s");
+    private static final By GO_TO_BASKET = By.cssSelector(".top-panel__userbar__cart__item");
+
     public UserPage(WebDriver driver) {
         super(driver);
     }
@@ -41,5 +43,11 @@ public class UserPage extends BasePage {
         driver.findElement(SEARCH_PRODUCT).sendKeys(name);
         driver.findElement(SEARCH_PRODUCT).sendKeys(Keys.ENTER);
         return new ProductPage(driver);
+    }
+
+    public BasketPage goToBasket() {
+        driver.findElement(GO_TO_BASKET).click();
+        BasketPage basket = new BasketPage(driver);
+        return basket;
     }
 }

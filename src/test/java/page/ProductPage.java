@@ -22,6 +22,7 @@ public class ProductPage extends BasePage {
     private static final By COUNTER_PRODUCT_WISHLIST = By.cssSelector(".top-panel__userbar__favs__count");
     private static final By ADD_TO_WISHLIST = By.cssSelector(".b-product-action__label_fav-action");
     private static final By ADD_INDICATOR = By.cssSelector(".b-product-action__spinner");
+
     public ProductPage(WebDriver driver) {
         super(driver);
     }
@@ -64,6 +65,7 @@ public class ProductPage extends BasePage {
     public void addProductAndCheckCountAfterAdding(int count) {
         driver.findElement(ADD_PRODUCT_TO_BASKET).click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(COUNTER_PRODUCT_BASKET));
+        driver.navigate().refresh();
         int countAfter = Integer.parseInt(driver.findElement(COUNTER_PRODUCT_BASKET).getText());
         assertEquals(count + 1, countAfter, "Не сошлись значения корзины и количество добавленного товара");
     }
