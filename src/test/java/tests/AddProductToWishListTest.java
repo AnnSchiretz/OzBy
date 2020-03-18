@@ -11,4 +11,13 @@ public class AddProductToWishListTest extends BaseTest {
         product.choiceProduct(name)
                 .validationProductCountInWishList(count);
     }
+
+    @Test
+    public void deleteProductFromWishList() {
+        String name = "Ручка шариковая синяя \"Original\" (0,5 мм)";
+        userSteps.goToWishList();
+        int count = userSteps.saveCount();
+        userSteps.deleteProductFromWishList(name)
+                .validationAfterDelete(count);
+    }
 }

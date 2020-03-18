@@ -84,6 +84,7 @@ public class ProductPage extends BasePage {
         String status = wait.until(ExpectedConditions.visibilityOfElementLocated(PRODUCT_STATUS)).getText();
         assertEquals(status, "В избранном", "Не добавился товар в избранное");
         wait.until(ExpectedConditions.visibilityOfElementLocated(COUNTER_PRODUCT_WISHLIST));
+        driver.navigate().refresh();
         int countAfter = Integer.parseInt(driver.findElement(COUNTER_PRODUCT_WISHLIST).getText());
         assertEquals(count + 1, countAfter, "Не сошлись значения корзины и количество добавленного товара");
     }

@@ -40,7 +40,7 @@ public class BaseTest {
 
     }
 
-    @AfterMethod
+    @AfterMethod(alwaysRun = true)
     public void closeDriver() {
         driver.quit();
     }
