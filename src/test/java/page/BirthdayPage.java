@@ -26,7 +26,11 @@ public class BirthdayPage extends BasePage {
     private static final By MALE_GENDER = By.xpath("//input[@value='male']/../..");
     private static final By BIRTHDAY_COMMENT = By.name("birthday[note]");
     private static final By ADD_BIRTHDAY_BUTTON = By.cssSelector(".i-popup__footer-accent button");
-    private static final By BIRTHDAY_CARDS = By.cssSelector(".birthday-card__content");
+    private static final By BIRTHDAY_CARDS = By.cssSelector(".edit-birthday");
+    private static final By BIRTHDAY_NAME_CARD = By.cssSelector(".birthday-card__name");
+    private static final By DELETE_BIRTHDAY = By.cssSelector(".delete-birthday");
+    private static final By EDIT_FORM = By.cssSelector(".i-popup-birthday__edit");
+    private static final By DELETE_CONFIRM = By.cssSelector(".delete-birthday-confirmed");
 
     public BirthdayPage(WebDriver driver) {
         super(driver);
@@ -78,9 +82,31 @@ public class BirthdayPage extends BasePage {
         return this;
     }
 
-    public BirthdayPage checkCountBirthdayCards(int size) {
+    public BirthdayPage checkCountBirthdayCardsAfterAdding(int size) {
         List<WebElement> cards = driver.findElements(BIRTHDAY_CARDS);
         assertEquals(size + 1, cards.size(), "Не произошло добавление карточки дня рождения");
+        return this;
+    }
+
+    public BirthdayPage checkCountAfterDelete(int size) {
+        List<WebElement> cards = driver.findElements(BIRTHDAY_CARDS);
+        assertEquals(size - 1, cards.size(), "Не произошло удаления карточки дня рождения");
+        return this;
+    }
+
+    public BirthdayPage deleteBirthdayCard(String name) {
+        List<WebElement> birthdayCards = driver.findElements(BIRTHDAY_CARDS);
+        for (WebElement card : birthdayCards) {
+            String birthdayName = card.findElement(BIRTHDAY_NAME_CARD).getText();
+            System.out.println(birthdayName);
+            if (birthdayName.equals(name)) {
+                card.click();
+                driver.findElement(EDIT_FORM).isDisplayed();
+                driver.findElement(DELETE_BIRTHDAY).click();
+                wait.until(ExpectedConditions.elementToBeClickable(driver.findElement(DELETE_CONFIRM))).click();
+            }
+        }
+        driver.navigate().refresh();
         return this;
     }
 

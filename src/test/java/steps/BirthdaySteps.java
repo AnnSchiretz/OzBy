@@ -14,7 +14,7 @@ public class BirthdaySteps {
     }
 
     @Step("Go to Birthday page")
-    public int goToBirthday() {
+    public int countBeforeChanges() {
         birthday.openPage();
         return birthday.countBirthdayCard();
     }
@@ -27,7 +27,19 @@ public class BirthdaySteps {
 
     @Step("Check that card has been added")
     public BirthdaySteps birthdayCardValidation(int result) {
-        birthday.checkCountBirthdayCards(result);
+        birthday.checkCountBirthdayCardsAfterAdding(result);
+        return this;
+    }
+
+    @Step("Delete a birthday card")
+    public BirthdaySteps deleteCard(String name) {
+        birthday.deleteBirthdayCard(name);
+        return this;
+    }
+
+    @Step("Validation cards after delete")
+    public BirthdaySteps validationAfterDelete(int count) {
+        birthday.checkCountAfterDelete(count);
         return this;
     }
 }

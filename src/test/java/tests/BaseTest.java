@@ -19,6 +19,7 @@ public class BaseTest {
     UserSteps userSteps;
     PropertyManager props;
     BirthdaySteps birthday;
+    ProductSteps product;
 
 
     @BeforeMethod(description = "Opening Chrome Driver")
