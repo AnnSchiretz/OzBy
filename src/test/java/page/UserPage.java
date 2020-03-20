@@ -16,6 +16,7 @@ import static org.testng.Assert.assertEquals;
 public class UserPage extends BasePage {
     private static final By USER_ACCOUNT = By.cssSelector(".b-user-card");
     private static final By GO_TO_PERSONAL_INFO = By.xpath("//a[contains(text(), 'Личные данные')]");
+    private static final By GO_TO_BIRTHDAYS = By.xpath("//a[contains(text(), 'Дни рождения')]");
     private static final By GO_TO_WISHLIST = By.id("user-tab-wishlist");
     private static final By SEARCH_PRODUCT = By.id("top-s");
     private static final By GO_TO_BASKET = By.cssSelector(".top-panel__userbar__cart__item");
@@ -49,6 +50,13 @@ public class UserPage extends BasePage {
         PersonalInfoPage info = new PersonalInfoPage(driver);
         info.openPage();
         return info;
+    }
+
+    public BirthdayPage goToBirthdays() {
+        driver.findElement(GO_TO_BIRTHDAYS).click();
+        BirthdayPage birthday = new BirthdayPage(driver);
+        birthday.openPage();
+        return birthday;
     }
 
     public UserPage goToWishList() {

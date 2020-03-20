@@ -4,13 +4,11 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Listeners;
 import steps.*;
 import utils.CapabilitiesGenerator;
 import utils.PropertyManager;
 
 import static com.codeborne.selenide.Selenide.closeWebDriver;
-
 
 public class BaseTest {
     private WebDriver driver;
@@ -18,6 +16,7 @@ public class BaseTest {
     public PersonalInfoSteps infoSteps;
     public UserSteps userSteps;
     public PropertyManager props;
+    public BirthdaySteps birthday;
     public ProductSteps product;
     public BasketSteps basket;
 
@@ -27,6 +26,7 @@ public class BaseTest {
         login = new LogInSteps(driver);
         infoSteps = new PersonalInfoSteps(driver);
         userSteps = new UserSteps(driver);
+        birthday = new BirthdaySteps(driver);
         product = new ProductSteps(driver);
         basket = new BasketSteps(driver);
     }
