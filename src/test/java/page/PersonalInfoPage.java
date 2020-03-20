@@ -71,6 +71,7 @@ public class PersonalInfoPage extends BasePage {
     }
 
     public PersonalInfoPage validationAlias(String userName) {
+        driver.navigate().refresh();
         String result = driver.findElement(ALIAS_INPUT).getAttribute("value");
         assertEquals(result, userName, "Не совпадают имена после изменения");
         return this;
