@@ -11,14 +11,9 @@ public class AddProductToBasketTest extends BaseTest {
         int count = product.countProductBefore();
         product.choiceProduct(nameProduct)
                 .validationProductCount(count);
-    }
-
-    @Test
-    public void deleteProduct() {
-        String nameProduct = "Ведьмак. Час Презрения";
         userSteps.goToBasket();
-        int count = basket.checkCountProduct();
+        int countSecond = basket.checkCountProduct();
         basket.deleteProduct(nameProduct)
-                .validationAfterDelete(count);
+                .validationAfterDelete(countSecond);
     }
 }
