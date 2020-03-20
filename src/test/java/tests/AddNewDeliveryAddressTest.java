@@ -1,6 +1,7 @@
 package tests;
 
 import models.Address;
+import tests.base.BaseTest;
 import org.testng.annotations.Test;
 
 public class AddNewDeliveryAddressTest extends BaseTest {

@@ -1,6 +1,7 @@
 package tests;
 
 import model.InfoForBirthday;
+import tests.base.BaseTest;
 import org.testng.annotations.Test;
 
 public class AddNewBirthdayCardTest extends BaseTest {
