@@ -19,6 +19,7 @@ public class UserPage extends BasePage {
     private static final By GO_TO_BIRTHDAYS = By.xpath("//a[contains(text(), 'Дни рождения')]");
     private static final By GO_TO_WISHLIST = By.id("user-tab-wishlist");
     private static final By SEARCH_PRODUCT = By.id("top-s");
+    private static final By GO_TO_BASKET = By.cssSelector(".top-panel__userbar__cart__item");
     private static final By PRODUCT_IN_WISHLIST = By.cssSelector(".viewer-type-card_has-filter li");
     private static final By PRODUCT_NAME = By.cssSelector(".item-type-card__title");
     private static final By DELETE_BUTTON = By.cssSelector(".item-type-card__controls-trigger");
@@ -98,5 +99,11 @@ public class UserPage extends BasePage {
         List<WebElement> list = driver.findElements(PRODUCT_IN_WISHLIST);
         assertEquals(count - 1, list.size(), " Не удалился продукт");
         return this;
+    }
+
+    public BasketPage goToBasket() {
+        driver.findElement(GO_TO_BASKET).click();
+        BasketPage basket = new BasketPage(driver);
+        return basket;
     }
 }

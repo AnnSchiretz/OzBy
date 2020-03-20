@@ -3,6 +3,8 @@ package tests;
 import models.Address;
 import tests.base.BaseTest;
 import org.testng.annotations.Test;
+import tests.base.BaseTest;
+
 
 public class AddNewDeliveryAddressTest extends BaseTest {
     @Test

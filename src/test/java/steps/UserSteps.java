@@ -49,4 +49,9 @@ public class UserSteps {
         return this;
     }
 
+
+    @Step("Go to basket")
+    public void goToBasket() {
+        userPage.goToBasket();
+    }
 }

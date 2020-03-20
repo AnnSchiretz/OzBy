@@ -11,5 +11,9 @@ public class AddProductToBasketTest extends BaseTest {
         int count = product.countProductBefore();
         product.choiceProduct(nameProduct)
                 .validationProductCount(count);
+        userSteps.goToBasket();
+        int countSecond = basket.checkCountProduct();
+        basket.deleteProduct(nameProduct)
+                .validationAfterDelete(countSecond);
     }
 }
