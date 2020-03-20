@@ -4,7 +4,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Listeners;
+import steps.BirthdaySteps;
 import steps.LogInSteps;
 import steps.PersonalInfoSteps;
 import steps.ProductSteps;
@@ -14,13 +14,13 @@ import utils.PropertyManager;
 
 import static com.codeborne.selenide.Selenide.closeWebDriver;
 
-@Listeners(TestListener.class)
 public class BaseTest {
     private WebDriver driver;
     public LogInSteps login;
     public PersonalInfoSteps infoSteps;
     public UserSteps userSteps;
     public PropertyManager props;
+    public BirthdaySteps birthday;
     public ProductSteps product;
 
     @BeforeMethod(description = "Opening Chrome Driver")
@@ -29,6 +29,7 @@ public class BaseTest {
         login = new LogInSteps(driver);
         infoSteps = new PersonalInfoSteps(driver);
         userSteps = new UserSteps(driver);
+        birthday = new BirthdaySteps(driver);
         product = new ProductSteps(driver);
     }
 

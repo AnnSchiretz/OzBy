@@ -17,6 +17,11 @@ public class UserSteps {
                 .goToPersonalInfo();
     }
 
+    @Step("Go to Birthday")
+    public void goToBirthdays() {
+        userPage.openPage()
+                .goToBirthdays();
+    }
     @Step("Search product")
     public void searchProduct(String name) {
         userPage.searchProduct(name);

@@ -1,5 +1,9 @@
 package page;
 
+import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
+import org.openqa.selenium.TimeoutException;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -12,6 +16,7 @@ import static org.testng.Assert.assertEquals;
 public class UserPage extends BasePage {
     private static final By USER_ACCOUNT = By.cssSelector(".b-user-card");
     private static final By GO_TO_PERSONAL_INFO = By.xpath("//a[contains(text(), 'Личные данные')]");
+    private static final By GO_TO_BIRTHDAYS = By.xpath("//a[contains(text(), 'Дни рождения')]");
     private static final By GO_TO_WISHLIST = By.id("user-tab-wishlist");
     private static final By SEARCH_PRODUCT = By.id("top-s");
     private static final By PRODUCT_IN_WISHLIST = By.cssSelector(".viewer-type-card_has-filter li");
@@ -44,6 +49,13 @@ public class UserPage extends BasePage {
         PersonalInfoPage info = new PersonalInfoPage(driver);
         info.openPage();
         return info;
+    }
+
+    public BirthdayPage goToBirthdays() {
+        driver.findElement(GO_TO_BIRTHDAYS).click();
+        BirthdayPage birthday = new BirthdayPage(driver);
+        birthday.openPage();
+        return birthday;
     }
 
     public UserPage goToWishList() {
