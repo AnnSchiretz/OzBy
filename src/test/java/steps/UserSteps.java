@@ -22,6 +22,29 @@ public class UserSteps {
         userPage.searchProduct(name);
     }
 
+    @Step("Go to wish list ")
+    public void goToWishList() {
+        userPage.goToWishList();
+    }
+
+    @Step("Save count of product in wish list")
+    public int saveCount() {
+        return userPage.countFavoriteProduct();
+    }
+
+    @Step("Delete product from wish list")
+    public UserSteps deleteProductFromWishList(String name) {
+        userPage.deleteProductFromWishList(name);
+        return this;
+    }
+
+    @Step("Validate count before and after delete product")
+    public UserSteps validationAfterDelete(int count) {
+        userPage.countAfterDeleteProduct(count);
+        return this;
+    }
+
+
     @Step("Go to basket")
     public void goToBasket() {
         userPage.goToBasket();

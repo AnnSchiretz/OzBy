@@ -1,21 +1,28 @@
-package tests;
+package tests.base;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
-import steps.*;
+import org.testng.annotations.Listeners;
+import steps.LogInSteps;
+import steps.PersonalInfoSteps;
+import steps.ProductSteps;
+import steps.UserSteps;
 import utils.CapabilitiesGenerator;
 import utils.PropertyManager;
 
+import static com.codeborne.selenide.Selenide.closeWebDriver;
+
+
 public class BaseTest {
     private WebDriver driver;
-    LogInSteps login;
-    PersonalInfoSteps infoSteps;
-    UserSteps userSteps;
-    PropertyManager props;
-    ProductSteps product;
-    BasketSteps basket;
+    public LogInSteps login;
+    public PersonalInfoSteps infoSteps;
+    public UserSteps userSteps;
+    public PropertyManager props;
+    public ProductSteps product;
+    public BasketSteps basket;
 
     @BeforeMethod(description = "Opening Chrome Driver")
     public void createDriver() {
@@ -39,7 +46,7 @@ public class BaseTest {
 
     }
 
-    @AfterMethod
+    @AfterMethod(alwaysRun = true)
     public void closeDriver() {
         driver.quit();
     }
