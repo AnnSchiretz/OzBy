@@ -39,8 +39,8 @@ public class BaseTest {
 
     }
 
-//    @AfterMethod
-//    public void closeDriver() {
-//        driver.quit();
-//    }
+    @AfterMethod
+    public void closeDriver() {
+        driver.quit();
+    }
 }
