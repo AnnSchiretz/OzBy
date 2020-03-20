@@ -83,8 +83,9 @@ public class ProductPage extends BasePage {
         wait.until(ExpectedConditions.invisibilityOfElementLocated(ADD_INDICATOR));
         String status = wait.until(ExpectedConditions.visibilityOfElementLocated(PRODUCT_STATUS)).getText();
         assertEquals(status, "В избранном", "Не добавился товар в избранное");
-        wait.until(ExpectedConditions.visibilityOfElementLocated(COUNTER_PRODUCT_WISHLIST));
-        int countAfter = Integer.parseInt(driver.findElement(COUNTER_PRODUCT_WISHLIST).getText());
+        driver.navigate().refresh();
+        int countAfter = Integer.parseInt(wait.until(ExpectedConditions.elementToBeClickable(driver
+                .findElement(COUNTER_PRODUCT_WISHLIST))).getText());
         assertEquals(count + 1, countAfter, "Не сошлись значения корзины и количество добавленного товара");
     }
 }

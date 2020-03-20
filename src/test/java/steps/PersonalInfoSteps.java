@@ -1,8 +1,10 @@
 package steps;
 
 import io.qameta.allure.Step;
+import models.Address;
 import org.openqa.selenium.WebDriver;
 import page.PersonalInfoPage;
+
 
 public class PersonalInfoSteps {
     private PersonalInfoPage infoPage;
@@ -28,6 +30,13 @@ public class PersonalInfoSteps {
         infoPage.validationAlias(userName);
     }
 
+    @Step("Add new address")
+    public void addAddress(Address address) {
+        infoPage.goToAddressInfo();
+        int sizeAddress = infoPage.checkAddressBeforeAdding();
+        infoPage.addAddressDelivery(address);
+        infoPage.checkAddressAfterAdding(sizeAddress);
+    }
     @Step("Go to addresses list and check count before delete ")
     public int goToAddresses() {
         infoPage.goToAddressInfo();

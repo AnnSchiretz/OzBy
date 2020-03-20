@@ -1,4 +1,4 @@
-package tests;
+package tests.base;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -12,15 +12,16 @@ import steps.UserSteps;
 import utils.CapabilitiesGenerator;
 import utils.PropertyManager;
 
+import static com.codeborne.selenide.Selenide.closeWebDriver;
+
 public class BaseTest {
     private WebDriver driver;
-    LogInSteps login;
-    PersonalInfoSteps infoSteps;
-    UserSteps userSteps;
-    PropertyManager props;
-    BirthdaySteps birthday;
-    ProductSteps product;
-
+    public LogInSteps login;
+    public PersonalInfoSteps infoSteps;
+    public UserSteps userSteps;
+    public PropertyManager props;
+    public BirthdaySteps birthday;
+    public ProductSteps product;
 
     @BeforeMethod(description = "Opening Chrome Driver")
     public void createDriver() {
@@ -44,7 +45,7 @@ public class BaseTest {
 
     }
 
-    @AfterMethod
+    @AfterMethod(alwaysRun = true)
     public void closeDriver() {
         driver.quit();
     }
