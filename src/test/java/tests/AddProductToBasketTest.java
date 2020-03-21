@@ -4,8 +4,8 @@ import org.testng.annotations.Test;
 import tests.base.BaseTest;
 
 public class AddProductToBasketTest extends BaseTest {
-    @Test
-    public void addProductToBasket() {
+    @Test(description = "Add product in user basket and removing them")
+    public void addAndDeleteProductToBasket() {
         String nameProduct = "Ведьмак. Час Презрения";
         userSteps.searchProduct(nameProduct);
         int count = product.countProductBefore();

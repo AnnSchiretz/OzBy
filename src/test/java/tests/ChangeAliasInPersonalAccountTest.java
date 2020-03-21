@@ -4,7 +4,7 @@ import org.testng.annotations.Test;
 import tests.base.BaseTest;
 
 public class ChangeAliasInPersonalAccountTest extends BaseTest {
-    @Test
+    @Test(description = "Change user alias in personal info page")
     public void goToPersonalInfo() {
         String alias = "Helena";
         String newAlias = "Hanna";

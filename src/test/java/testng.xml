@@ -1,18 +1,42 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite thread-count="2" verbose="5" name="Test suite" parallel="tests">
+    <listeners>
+        <listener class-name="tests.base.RetryListener"/>
+    </listeners>
     <test name="test 1">
         <classes>
-            <class name="tests.base.BaseTest"/>
-            <class name="tests.AddProductToBasketTest"/>
             <class name="tests.AddProductToWishListTest"/>
         </classes>
     </test>
     <test name="test 2">
         <classes>
+            <class name="tests.AddNewDeliveryAddressTest"/>
+        </classes>
+    </test>
+    <test name="test 3">
+        <classes>
+            <class name="tests.AddProductToBasketTest"/>
+        </classes>
+    </test>
+    <test name="test 4">
+        <classes>
             <class name="tests.ChangeAliasInPersonalAccountTest"/>
+        </classes>
+    </test>
+    <test name="test 5">
+        <classes>
             <class name="tests.DeleteDeliveryAddressTest"/>
+        </classes>
+    </test>
+    <test name="test 6">
+        <classes>
             <class name="tests.UploadNewPhotoInAccountTest"/>
+        </classes>
+    </test>
+    <test name="test 7">
+        <classes>
+            <class name="tests.AddNewBirthdayCardTest"/>
         </classes>
     </test>
 </suite>

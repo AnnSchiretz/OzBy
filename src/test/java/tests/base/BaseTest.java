@@ -4,12 +4,13 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Listeners;
 import steps.*;
 import utils.CapabilitiesGenerator;
 import utils.PropertyManager;
 
-import static com.codeborne.selenide.Selenide.closeWebDriver;
 
+@Listeners(TestListener.class)
 public class BaseTest {
     private WebDriver driver;
     public LogInSteps login;
@@ -36,7 +37,7 @@ public class BaseTest {
         props = new PropertyManager();
     }
 
-    @BeforeMethod
+    @BeforeMethod(description = "Login in Oz.by")
     public void login() {
         login.ozIsOpenRegistrationPage()
                 .login(props.get("email"), props.get("password"));

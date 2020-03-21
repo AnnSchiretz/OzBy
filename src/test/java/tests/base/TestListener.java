@@ -1,10 +1,6 @@
 package tests.base;
 
-import io.qameta.allure.Attachment;
 import lombok.extern.log4j.Log4j2;
-import org.openqa.selenium.NoSuchSessionException;
-import org.openqa.selenium.OutputType;
-import org.openqa.selenium.TakesScreenshot;
 import org.testng.ITestListener;
 import org.testng.ITestResult;
 
