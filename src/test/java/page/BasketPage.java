@@ -18,8 +18,7 @@ public class BasketPage extends BasePage {
     private static final By PRODUCT_CHECKBOX = By.xpath("//div[@class='goods-table-cell']//input");
     private static final By DELETE_BUTTON = By.xpath("//div[contains(@class,'i-layout-column_full')]//button[contains(@class, 'remove')]");
     private static final By DELETE_CONFIRMATION = By.cssSelector(".goods-table-popup_visible .remove-yes");
-    private static final By DELETE_CONFIRMATION_MODAL = By.cssSelector(".goods-table-popup_visible");
-    private static final By INFO_MODAL = By.cssSelector(".deal-form-main__info");
+    private static final By DELETE_CONFIRMATION_MODAL = By.cssSelector(".goods-table-popup_visible .goods-table-popup__line");
     private static final By INFO_MODAL_LIST = By.cssSelector(".i-popover__footer");
     private static final By POP_UP_INFO = By.xpath("//tr[contains(@class, 'goods-table__row_temp')]/following-sibling::tr//button[contains(@class, 'goods-order-help-popup')]");
     private static final By POP_UP_INFO2 = By.xpath("//div[contains(@class, 'deal-form-main__popover_top')]//button");
@@ -77,9 +76,9 @@ public class BasketPage extends BasePage {
                     AllureUtils.takeScreenshot(driver);
                     driver.findElement(POP_UP_INFO2).click();
                 }
-                WebElement firstButton = wait.until(ExpectedConditions.visibilityOfElementLocated(DELETE_BUTTON));
+                WebElement firstButton = wait.until(ExpectedConditions.elementToBeClickable(DELETE_BUTTON));
                 firstButton.click();
-                WebElement confButton = wait.until(ExpectedConditions.visibilityOfElementLocated(DELETE_CONFIRMATION));
+                WebElement confButton = wait.until(ExpectedConditions.elementToBeClickable(DELETE_CONFIRMATION));
                 wait.until(ExpectedConditions.textToBePresentInElement(driver.findElement(DELETE_CONFIRMATION), "Да, удалить"));
                 confButton.click();
                 break;
