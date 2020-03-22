@@ -67,7 +67,11 @@ public class ProductPage extends BasePage {
         wait.until(ExpectedConditions.visibilityOfElementLocated(COUNTER_PRODUCT_BASKET));
         driver.navigate().refresh();
         int countAfter = Integer.parseInt(driver.findElement(COUNTER_PRODUCT_BASKET).getText());
-        assertEquals(count + 1, countAfter, "Не сошлись значения корзины и количество добавленного товара");
+        if (count == 1) {
+            assertEquals(count, countAfter, "Не сошлись значения корзины и количество добавленного товара");
+        } else {
+            assertEquals(count + 1, countAfter, "Не сошлись значения корзины и количество добавленного товара");
+        }
     }
 
     public int countBeforeAddInWishList() {
