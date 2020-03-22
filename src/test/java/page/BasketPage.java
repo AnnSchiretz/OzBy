@@ -2,7 +2,6 @@ package page;
 
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.xbill.DNS.MDRecord;
 import utils.AllureUtils;
 
 import java.util.List;
