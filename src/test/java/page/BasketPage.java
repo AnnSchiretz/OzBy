@@ -85,13 +85,8 @@ public class BasketPage extends BasePage {
                 break;
             }
         }
-        if (list.size() < 2) {
-            driver.navigate().refresh();
-            driver.findElement(EMPTY_BASKET).isDisplayed();
-        } else {
-            driver.findElement(INFO_MODAL).isDisplayed();
-            driver.navigate().refresh();
-        }
+        driver.navigate().refresh();
+        driver.findElement(EMPTY_BASKET).isDisplayed();
         return this;
     }
 
