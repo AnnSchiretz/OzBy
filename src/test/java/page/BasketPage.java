@@ -74,10 +74,9 @@ public class BasketPage extends BasePage {
                     AllureUtils.takeScreenshot(driver);
                     driver.findElement(POP_UP_INFO2).click();
                 }
-                WebElement firstButton = wait.until(ExpectedConditions.elementToBeClickable(DELETE_BUTTON));
+                WebElement firstButton = wait.until(ExpectedConditions.refreshed(ExpectedConditions.elementToBeClickable(DELETE_BUTTON)));
                 firstButton.click();
-                WebElement confButton = wait.until(ExpectedConditions.elementToBeClickable(DELETE_CONFIRMATION));
-                wait.until(ExpectedConditions.textToBePresentInElement(driver.findElement(DELETE_CONFIRMATION), "Да, удалить"));
+                WebElement confButton = wait.until(ExpectedConditions.refreshed(ExpectedConditions.elementToBeClickable(DELETE_CONFIRMATION)));
                 confButton.click();
                 break;
             }
