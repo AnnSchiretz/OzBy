@@ -2,6 +2,7 @@ package page;
 
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.xbill.DNS.MDRecord;
 import utils.AllureUtils;
 
 import java.util.List;
@@ -17,6 +18,8 @@ public class BasketPage extends BasePage {
     private static final By PRODUCT_CHECKBOX = By.xpath("//div[@class='goods-table-cell']//input");
     private static final By DELETE_BUTTON = By.xpath("//div[contains(@class,'i-layout-column_full')]//button[contains(@class, 'remove')]");
     private static final By DELETE_CONFIRMATION = By.cssSelector(".goods-table-popup_visible .remove-yes");
+    private static final By CHECK_FOR_DELETE_BUTTON = By.xpath("//div[contains(@class, 'i-layout-column_full')]//" +
+            "tr[contains(@class, 'goods-table__row_footer')]//span[@class ='quantity-help-text']");
     private static final By INFO_MODAL_LIST = By.cssSelector(".i-popover__footer");
     private static final By POP_UP_INFO = By.xpath("//tr[contains(@class, 'goods-table__row_temp')]/following-sibling::tr//button[contains(@class, 'goods-order-help-popup')]");
     private static final By POP_UP_INFO2 = By.xpath("//div[contains(@class, 'deal-form-main__popover_top')]//button");
@@ -74,6 +77,7 @@ public class BasketPage extends BasePage {
                     AllureUtils.takeScreenshot(driver);
                     driver.findElement(POP_UP_INFO2).click();
                 }
+                wait.until(ExpectedConditions.textToBePresentInElementLocated(CHECK_FOR_DELETE_BUTTON, "Выбрано"));
                 WebElement firstButton = wait.until(ExpectedConditions.refreshed(ExpectedConditions.elementToBeClickable(DELETE_BUTTON)));
                 firstButton.click();
                 WebElement confButton = wait.until(ExpectedConditions.refreshed(ExpectedConditions.elementToBeClickable(DELETE_CONFIRMATION)));
