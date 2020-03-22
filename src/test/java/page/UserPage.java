@@ -25,6 +25,7 @@ public class UserPage extends BasePage {
     private static final By DELETE_BUTTON = By.cssSelector(".item-type-card__controls-trigger");
     private static final By CONFIRM_DELETE = By.cssSelector(".item-type-card__controls-button");
     private static final By DELETE_SPINER = By.cssSelector(".item-type-card__controls-button-spinner");
+    private static final By WISHLIST_INFO = By.cssSelector(".search-info-results__content");
 
     public UserPage(WebDriver driver) {
         super(driver);
@@ -88,10 +89,12 @@ public class UserPage extends BasePage {
                 act.click(product.findElement(DELETE_BUTTON)).build().perform();
                 act.click(product.findElement(CONFIRM_DELETE)).build().perform();
                 wait.until(ExpectedConditions.invisibilityOf(product.findElement(DELETE_SPINER)));
+                wait.until(ExpectedConditions.visibilityOfElementLocated(WISHLIST_INFO));
             }
             break;
         }
         driver.navigate().refresh();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(WISHLIST_INFO));
         return this;
     }
 
