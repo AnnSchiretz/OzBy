@@ -1,6 +1,5 @@
 package page;
 
-import org.bouncycastle.asn1.x500.style.BCStrictStyle;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import utils.AllureUtils;
@@ -18,7 +17,6 @@ public class BasketPage extends BasePage {
     private static final By PRODUCT_CHECKBOX = By.xpath("//div[@class='goods-table-cell']//input");
     private static final By DELETE_BUTTON = By.xpath("//div[contains(@class,'i-layout-column_full')]//button[contains(@class, 'remove')]");
     private static final By DELETE_CONFIRMATION = By.cssSelector(".goods-table-popup_visible .remove-yes");
-    private static final By DELETE_CONFIRMATION_MODAL = By.cssSelector(".goods-table-popup_visible .goods-table-popup__line");
     private static final By INFO_MODAL_LIST = By.cssSelector(".i-popover__footer");
     private static final By POP_UP_INFO = By.xpath("//tr[contains(@class, 'goods-table__row_temp')]/following-sibling::tr//button[contains(@class, 'goods-order-help-popup')]");
     private static final By POP_UP_INFO2 = By.xpath("//div[contains(@class, 'deal-form-main__popover_top')]//button");
