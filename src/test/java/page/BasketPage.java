@@ -81,8 +81,7 @@ public class BasketPage extends BasePage {
                 WebElement firstButton = driver.findElement(DELETE_BUTTON);
                 wait.until(ExpectedConditions.elementToBeClickable(firstButton)).click();
                 WebElement deleteButton = driver.findElement(DELETE_CONFIRMATION);
-                wait.until(ExpectedConditions.visibilityOf(deleteButton)).isDisplayed();
-                deleteButton.click();
+                wait.until(ExpectedConditions.elementToBeClickable(deleteButton)).click();
                 break;
             }
         }
