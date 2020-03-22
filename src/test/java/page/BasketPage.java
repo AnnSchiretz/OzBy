@@ -1,6 +1,9 @@
 package page;
 
-import org.openqa.selenium.*;
+import org.openqa.selenium.By;
+import org.openqa.selenium.TimeoutException;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import utils.AllureUtils;
 
@@ -33,24 +36,11 @@ public class BasketPage extends BasePage {
     }
 
     private void isPageOpened() {
-        if (driver.findElements(INFO_MODAL_LIST).size() > 2) {
-            driver.findElement(POP_UP_INFO).click();
-        }
-        if (driver.findElements(PRODUCT_IN_BASKET).isEmpty()) {
-            try {
-                wait.until(ExpectedConditions.visibilityOfElementLocated(EMPTY_BASKET));
-            } catch (TimeoutException ex) {
-                AllureUtils.takeScreenshot(driver);
-                throw new TimeoutException("Страница не загрузилась");
-            }
-        }
-        if (!driver.findElements(PRODUCT_IN_BASKET).isEmpty()) {
-            try {
-                wait.until(ExpectedConditions.visibilityOfElementLocated(PRODUCT_IN_BASKET));
-            } catch (TimeoutException ex) {
-                AllureUtils.takeScreenshot(driver);
-                throw new TimeoutException("Страница не загрузилась");
-            }
+        try {
+            wait.until(ExpectedConditions.visibilityOfElementLocated(PRODUCT_IN_BASKET));
+        } catch (TimeoutException ex) {
+            AllureUtils.takeScreenshot(driver);
+            throw new TimeoutException("Страница не загрузилась");
         }
     }
 
