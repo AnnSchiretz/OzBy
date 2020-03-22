@@ -1,6 +1,6 @@
 package page;
 
-import model.InfoForBirthday;
+import models.InfoForBirthday;
 import org.openqa.selenium.By;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;

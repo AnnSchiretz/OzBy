@@ -1,7 +1,7 @@
 package steps;
 
 import io.qameta.allure.Step;
-import model.InfoForBirthday;
+import models.InfoForBirthday;
 import org.openqa.selenium.WebDriver;
 import page.BirthdayPage;
 

@@ -1,6 +1,6 @@
 package tests;
 
-import model.InfoForBirthday;
+import models.InfoForBirthday;
 import tests.base.BaseTest;
 import org.testng.annotations.Test;
 

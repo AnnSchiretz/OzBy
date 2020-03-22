@@ -79,8 +79,8 @@ public class BasketPage extends BasePage {
                 }
                 WebElement firstButton = wait.until(ExpectedConditions.visibilityOfElementLocated(DELETE_BUTTON));
                 firstButton.click();
-                driver.findElement(DELETE_CONFIRMATION_MODAL).isDisplayed();
                 WebElement confButton = wait.until(ExpectedConditions.visibilityOfElementLocated(DELETE_CONFIRMATION));
+                wait.until(ExpectedConditions.textToBePresentInElement(driver.findElement(DELETE_CONFIRMATION), "Да, удалить"));
                 confButton.click();
                 break;
             }
