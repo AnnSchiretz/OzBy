@@ -1,9 +1,7 @@
 package page;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.TimeoutException;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.bouncycastle.asn1.x500.style.BCStrictStyle;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import utils.AllureUtils;
 
@@ -20,6 +18,7 @@ public class BasketPage extends BasePage {
     private static final By PRODUCT_CHECKBOX = By.xpath("//div[@class='goods-table-cell']//input");
     private static final By DELETE_BUTTON = By.xpath("//div[contains(@class,'i-layout-column_full')]//button[contains(@class, 'remove')]");
     private static final By DELETE_CONFIRMATION = By.cssSelector(".goods-table-popup_visible .remove-yes");
+    private static final By DELETE_CONFIRMATION_MODAL = By.cssSelector(".goods-table-popup_visible");
     private static final By INFO_MODAL = By.cssSelector(".deal-form-main__info");
     private static final By INFO_MODAL_LIST = By.cssSelector(".i-popover__footer");
     private static final By POP_UP_INFO = By.xpath("//tr[contains(@class, 'goods-table__row_temp')]/following-sibling::tr//button[contains(@class, 'goods-order-help-popup')]");
@@ -78,10 +77,11 @@ public class BasketPage extends BasePage {
                     AllureUtils.takeScreenshot(driver);
                     driver.findElement(POP_UP_INFO2).click();
                 }
-                WebElement firstButton = driver.findElement(DELETE_BUTTON);
-                wait.until(ExpectedConditions.elementToBeClickable(firstButton)).click();
-                WebElement deleteButton = wait.until(ExpectedConditions.visibilityOfElementLocated(DELETE_CONFIRMATION));
-                deleteButton.click();
+                WebElement firstButton = wait.until(ExpectedConditions.visibilityOfElementLocated(DELETE_BUTTON));
+                firstButton.click();
+                driver.findElement(DELETE_CONFIRMATION_MODAL).isDisplayed();
+                WebElement confButton = wait.until(ExpectedConditions.visibilityOfElementLocated(DELETE_CONFIRMATION));
+                confButton.click();
                 break;
             }
         }
