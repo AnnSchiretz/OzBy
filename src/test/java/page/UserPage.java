@@ -72,7 +72,7 @@ public class UserPage extends BasePage {
     }
 
     public int countFavoriteProduct() {
-        List<WebElement> list = driver.findElements(PRODUCT_IN_WISHLIST);
+        List<WebElement> list = wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(PRODUCT_IN_WISHLIST));
         return list.size();
     }
 

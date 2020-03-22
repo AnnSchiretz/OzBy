@@ -130,7 +130,7 @@ public class PersonalInfoPage extends BasePage {
     }
 
     public PersonalInfoPage checkAddressAfterAdding(int size) {
-        List<WebElement> addressesAfterAdding = driver.findElements(ADDED_ADDRESSES);
+        List<WebElement> addressesAfterAdding = wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(ADDED_ADDRESSES));
         assertEquals(size + 1, addressesAfterAdding.size(), "Не совпало количество адресов после добавления и до добавления");
         return this;
     }
@@ -152,7 +152,6 @@ public class PersonalInfoPage extends BasePage {
         } else {
             for (WebElement a : addresses) {
                 String name = a.findElement(ADDRESS_NAME).getText();
-                System.out.println(name);
                 if (name.equals(address)) {
                     Actions act = new Actions(driver);
                     act.moveToElement(a).build().perform();
@@ -167,12 +166,9 @@ public class PersonalInfoPage extends BasePage {
     }
 
     public PersonalInfoPage checkCountAddressesAfterDelete(int size) {
-        List<WebElement> addressesAfterAdding = driver.findElements(ADDED_ADDRESSES);
-        if (size == 0) {
-            assertEquals(addressesAfterAdding.size(), size, "Не совпало количество до и после, значит не удалился адрес");
-        } else {
-            assertEquals(addressesAfterAdding.size(), size - 1, "Не совпало количество до и после, значит не удалился адрес");
-        }
+        driver.navigate().refresh();
+        wait.until(ExpectedConditions.presenceOfElementLocated(ADDRESS_FORM)).isDisplayed();
+        assertEquals(0, size - 1, "Не совпало количество до и после, значит не удалился адрес");
         return this;
     }
 }

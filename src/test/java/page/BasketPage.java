@@ -78,9 +78,11 @@ public class BasketPage extends BasePage {
                     AllureUtils.takeScreenshot(driver);
                     driver.findElement(POP_UP_INFO2).click();
                 }
-                driver.findElement(DELETE_BUTTON).click();
+                WebElement firstButton = driver.findElement(DELETE_BUTTON);
+                wait.until(ExpectedConditions.elementToBeClickable(firstButton)).click();
                 WebElement deleteButton = driver.findElement(DELETE_CONFIRMATION);
-                wait.until(ExpectedConditions.elementToBeClickable(deleteButton)).click();
+                wait.until(ExpectedConditions.visibilityOf(deleteButton)).isDisplayed();
+                deleteButton.click();
                 break;
             }
         }

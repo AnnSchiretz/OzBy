@@ -52,7 +52,6 @@ public class BirthdayPage extends BasePage {
 
     public int countBirthdayCard() {
         List<WebElement> card = driver.findElements(BIRTHDAY_CARDS);
-        System.out.println(card.size());
         return card.size();
     }
 
@@ -83,7 +82,7 @@ public class BirthdayPage extends BasePage {
     }
 
     public BirthdayPage checkCountBirthdayCardsAfterAdding(int size) {
-        List<WebElement> cards = driver.findElements(BIRTHDAY_CARDS);
+        List<WebElement> cards = wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(BIRTHDAY_CARDS));
         assertEquals(size + 1, cards.size(), "Не произошло добавление карточки дня рождения");
         return this;
     }
@@ -100,7 +99,7 @@ public class BirthdayPage extends BasePage {
             String birthdayName = card.findElement(BIRTHDAY_NAME_CARD).getText();
             System.out.println(birthdayName);
             if (birthdayName.equals(name)) {
-                card.click();
+                wait.until(ExpectedConditions.elementToBeClickable(card)).click();
                 driver.findElement(EDIT_FORM).isDisplayed();
                 driver.findElement(DELETE_BIRTHDAY).click();
                 wait.until(ExpectedConditions.elementToBeClickable(driver.findElement(DELETE_CONFIRM))).click();
