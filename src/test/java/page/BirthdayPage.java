@@ -31,6 +31,7 @@ public class BirthdayPage extends BasePage {
     private static final By DELETE_BIRTHDAY = By.cssSelector(".delete-birthday");
     private static final By EDIT_FORM = By.cssSelector(".i-popup-birthday__edit");
     private static final By DELETE_CONFIRM = By.cssSelector(".delete-birthday-confirmed");
+    private static final By POPUP_CONFIRM = By.cssSelector(".i-popup__line_delete");
 
     public BirthdayPage(WebDriver driver) {
         super(driver);
@@ -77,6 +78,7 @@ public class BirthdayPage extends BasePage {
         }
         driver.findElement(BIRTHDAY_COMMENT).sendKeys(user.getComment());
         driver.findElement(ADD_BIRTHDAY_BUTTON).click();
+        AllureUtils.takeScreenshot(driver);
         driver.navigate().refresh();
         return this;
     }
@@ -102,10 +104,14 @@ public class BirthdayPage extends BasePage {
                 wait.until(ExpectedConditions.elementToBeClickable(card)).click();
                 driver.findElement(EDIT_FORM).isDisplayed();
                 driver.findElement(DELETE_BIRTHDAY).click();
-                wait.until(ExpectedConditions.elementToBeClickable(driver.findElement(DELETE_CONFIRM))).click();
+                AllureUtils.takeScreenshot(driver);
+                wait.until(ExpectedConditions.visibilityOfElementLocated(POPUP_CONFIRM)).isDisplayed();
+                WebElement confirmDelete = driver.findElement(DELETE_CONFIRM);
+                wait.until(ExpectedConditions.elementToBeClickable(confirmDelete)).click();
             }
         }
         driver.navigate().refresh();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(BIRTHDAY_CARDS));
         return this;
     }
 
